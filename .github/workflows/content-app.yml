@@ -1,0 +1,31 @@
+name: content app build 
+
+on:
+  pull_request:
+    branches: [main, develop]
+    paths: 'apps/content_app/**'
+
+jobs:
+  build:
+    runs-on:  macos-latest
+    name: Build Application
+    steps:
+      - uses: actions/checkout@v2
+      - name: Cache Flutter dependencies
+        uses: actions/cache@v1
+        with:
+          path: /Users/runner/hostedtoolcache/flutter
+          key:  macos-latest-flutter
+      - uses: subosito/flutter-action@v1
+        with:
+          flutter-version: '2.0.1'
+          channel: stable
+      - uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: "Install Tools"
+        run: |
+          flutter pub global activate melos
+          echo $HOME/hostedtoolcache/flutter/2.0.1-stable/x64/.pub-cache/bin >> $GITHUB_PATH
+      - run: melos bootstrap
+      - run: melos run build:content_app_android
