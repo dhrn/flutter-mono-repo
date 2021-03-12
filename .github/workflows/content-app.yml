@@ -34,6 +34,7 @@ jobs:
   web_release:
     if: github.event_name == 'pull_request'
     runs-on:  macos-latest
+    name: Web Release
     steps:
       - uses: actions/checkout@v2
       - name: Cache Flutter dependencies
