@@ -54,10 +54,10 @@ jobs:
           flutter pub global activate melos
           echo $HOME/hostedtoolcache/flutter/2.0.1-stable/x64/.pub-cache/bin >> $GITHUB_PATH
       - run: melos bootstrap
-      - run: flutter build web
+      - run: melos run build:content_app_web
       - uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
           GITHUB_TOKEN: ${{ secrets.GIT_ACCESS_TOKEN }}
           BASE_BRANCH: main
           BRANCH: gh-pages
-          FOLDER: build/web
+          FOLDER: apps/content_app/build/web
