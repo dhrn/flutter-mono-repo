@@ -31,6 +31,38 @@ jobs:
           echo $HOME/hostedtoolcache/flutter/2.0.1-stable/x64/.pub-cache/bin >> $GITHUB_PATH
       - run: melos bootstrap
       - run: melos run build:content_app_android
+  android_release:
+    if: github.event_name == 'pull_request'
+    runs-on:  macos-latest
+    name: Android Release
+    steps:
+      - uses: actions/checkout@v2
+      - name: Cache Flutter dependencies
+        uses: actions/cache@v1
+        with:
+          path: /Users/runner/hostedtoolcache/flutter
+          key:  macos-latest-flutter
+      - uses: subosito/flutter-action@v1
+        with:
+          flutter-version: '2.0.1'
+          channel: stable
+      - uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: "Install Tools"
+        run: |
+          flutter pub global activate melos
+          echo $HOME/hostedtoolcache/flutter/2.0.1-stable/x64/.pub-cache/bin >> $GITHUB_PATH
+      - run: melos bootstrap
+      - run: melos run build:content_app_android
+      - name: Create a Release in GitHub
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "apps/content_app/build/app/outputs/apk/release/*.apk,apps/content_app/build/app/outputs/bundle/release/app-release.aab"
+          token: ${{ secrets.GIT_ACCESS_TOKEN }}
+          tag: v0.0.0-content-app-alpha-${{ github.run_number }}
+          commit: ${{ github.sha }}
+          prerelease: true
   web_release:
     if: github.event_name == 'push'
     runs-on:  macos-latest
