@@ -29,3 +29,4 @@ jobs:
           echo $HOME/hostedtoolcache/flutter/2.0.1-stable/x64/.pub-cache/bin >> $GITHUB_PATH
       - run: melos bootstrap
       - run: melos run build:content_app_android
+      - run: melos run build:content_app_ios
