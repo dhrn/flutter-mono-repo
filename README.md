@@ -1,6 +1,6 @@
 # flutter-mono-repo
 
-This is example flutter monorepo with a real time example. This reposiary using [Melos](https://github.com/invertase/melos) to manage the multiple apps and library. This structure is inspired from the [Nx workspace](https://nx.dev/). 
+This is flutter monorepo with a real time example. This reposiary using [Melos](https://github.com/invertase/melos) to manage the multiple apps and library. This structure is inspired from the [Nx workspace](https://nx.dev/). 
 
 # How to run ?
 ```
