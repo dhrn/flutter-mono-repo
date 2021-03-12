@@ -3,8 +3,10 @@ name: content app build
 on:
   pull_request:
     branches: [main, develop]
+    paths: apps/content_app/**
   push:
     branches: [main, develop]
+    paths: apps/content_app/**
 
 jobs:
   android_build:
@@ -32,7 +34,7 @@ jobs:
       - run: melos bootstrap
       - run: melos run build:content_app_android
   android_release:
-    if: github.event_name == 'push'
+    if: github.event_name == 'push' && contains(github.event.head_commit.message, 'release')
     runs-on:  macos-latest
     name: Android Release
     steps:
@@ -64,7 +66,7 @@ jobs:
           commit: ${{ github.sha }}
           prerelease: true
   web_release:
-    if: github.event_name == 'push'
+    if: github.event_name == 'push' && contains(github.event.head_commit.message, 'release')
     runs-on:  macos-latest
     name: Web Release
     steps:
