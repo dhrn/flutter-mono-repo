@@ -1,13 +1,12 @@
-name: content - Build and Deploy
+name: content app build 
 
 on:
-  push:
+  pull_request:
     branches: [main, develop]
     paths: 'apps/content_app/**'
 
 jobs:
   build:
-    if: github.event_name != 'pull_request'
     runs-on:  macos-latest
     name: Build Application
     steps:
