@@ -1,9 +1,9 @@
-name: Spabull - Build and Deploy
+name: content - Build and Deploy
 
 on:
   push:
-    branches: [master, develop]
-    paths: 'apps/spabull/**'
+    branches: [main, develop]
+    paths: 'apps/content_app/**'
 
 jobs:
   build:
