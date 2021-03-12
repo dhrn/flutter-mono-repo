@@ -11,4 +11,5 @@ melos clean && melos bootstrap
 # Deployed app url
 
 Content app web url -> https://content-app.netlify.app
+
 Process app web url -> https://process-app.netlify.app
