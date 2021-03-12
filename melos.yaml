@@ -1,0 +1,36 @@
+name: apps
+
+packages:
+  - libs/**
+  - apps/**
+
+scripts:
+  analyze:
+    run: melos exec -c 5 --fail-fast -- dart analyze .
+  format:
+    run: dart pub global run flutter_plugin_tools format
+
+  build:content_app_android:
+    run: melos exec -c 1 --fail-fast -- "flutter build apk --split-per-abi --release -v && flutter build appbundle --release --verbose"
+    description: Build a specific content_app app for Android.
+    select-package:
+      dir-exists:
+        - android
+      scope: '*content_app*'
+
+  build:content_app_ios:
+    run: melos exec -c 1 --fail-fast -- "flutter build ios --no-codesign --no-pub"
+    description: Build a specific content_app app for iOS.
+    select-package:
+      dir-exists:
+        - ios
+      scope: '*content_app*'
+
+  # Additional cleanup lifecycle script, executed when `melos clean` is ran.
+  postclean: melos exec -c 5 -- "flutter clean"
+dev_dependencies:
+  pedantic: ^1.9.2
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=2.0.0 3.0.0"
