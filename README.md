@@ -8,6 +8,7 @@ flutter pub global activate melos
 melos clean && melos bootstrap
 ```
 
-# deployed app url
+# Deployed app url
 
 Content app web url -> https://content-app.netlify.app
+Process app web url -> https://process-app.netlify.app
