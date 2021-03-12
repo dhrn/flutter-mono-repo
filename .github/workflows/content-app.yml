@@ -3,7 +3,8 @@ name: content app build
 on:
   pull_request:
     branches: [main, develop]
-    paths: 'apps/content_app/**'
+  push:
+    branches: [main, develop]
 
 jobs:
   build:
