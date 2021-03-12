@@ -26,6 +26,14 @@ scripts:
         - ios
       scope: '*content_app*'
 
+  build:content_app_web:
+    run: melos exec -c 1 --fail-fast -- "flutter build web"
+    description: Build a specific content_app app for web.
+    select-package:
+      dir-exists:
+        - web
+      scope: '*content_app*'
+
   # Additional cleanup lifecycle script, executed when `melos clean` is ran.
   postclean: melos exec -c 5 -- "flutter clean"
 dev_dependencies:
