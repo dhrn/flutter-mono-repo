@@ -59,5 +59,5 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.GIT_ACCESS_TOKEN }}
           BASE_BRANCH: main
-          BRANCH: gh-pages
+          BRANCH: content-app-gh-pages
           FOLDER: apps/content_app/build/web
