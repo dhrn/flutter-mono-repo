@@ -32,7 +32,7 @@ jobs:
       - run: melos bootstrap
       - run: melos run build:content_app_android
   web_release:
-    if: github.event_name != 'pull_request'
+    if: github.event_name == 'pull_request'
     runs-on:  macos-latest
     steps:
       - uses: actions/checkout@v2
